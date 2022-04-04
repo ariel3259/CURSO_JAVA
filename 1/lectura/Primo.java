@@ -1,3 +1,4 @@
+package lectura;
 public class Primo{
 
     private int numero;
