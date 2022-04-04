@@ -20,6 +20,8 @@ public class Ejercicio_1{
         System.out.println("Ingrese un numero");
         numero = scan.nextInt();
         
+        scan.close();
+
         for(int i = 0; i < numero; i++){
             z = x + y;
             System.out.println(z);
