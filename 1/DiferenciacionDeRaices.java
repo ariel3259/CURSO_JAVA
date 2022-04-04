@@ -19,7 +19,7 @@ public class DiferenciacionDeRaices{
 
         scan.close();
 
-        discriminante = Math.sqrt(Math.pow(b, 2) + 4 *(a+c)); 
+        discriminante = Math.sqrt(Math.pow(b, 2) + 4 *(a*c)); 
 
         System.out.println("Discriminante: "+ discriminante);
         if(discriminante > 0 ) System.out.println("Hay dos raizes reales distintas");
