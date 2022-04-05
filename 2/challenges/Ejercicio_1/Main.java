@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String args[]){
-        int opc;
+        char opc;
         float numero1, numero2;
         boolean salir=false;
         Scanner scanner = new Scanner(System.in);
@@ -14,18 +14,18 @@ public class Main{
         
         System.out.println("Calculadora");
         while(!salir){
-            System.out.println("1- Suma");
-            System.out.println("2- Resta");
-            System.out.println("3- Multiplicar");
-            System.out.println("4- Dividir");
-            System.out.println("5- Salir");
+            System.out.println("a- Suma");
+            System.out.println("b- Resta");
+            System.out.println("c- Multiplicar");
+            System.out.println("d- Dividir");
+            System.out.println("f- Salir");
             System.out.println("Ingrese una opcion: ");
-            opc = scanner.nextInt();
+            opc = scanner.next().charAt(0);
 
 
 
             switch(opc){
-                case 1:
+                case 'a':
                     System.out.println("Ingrese un numero: ");
                     numero1 = scanner.nextFloat();
     
@@ -35,7 +35,7 @@ public class Main{
                     calculadora = new Calculadora(numero1, numero2);
                     System.out.println("El resultado de la operacion es: "+ calculadora.Suma());
                     break;
-                case 2:
+                case 'b':
                     System.out.println("Ingrese un numero: ");
                     numero1 = scanner.nextFloat();
     
@@ -45,7 +45,7 @@ public class Main{
                     calculadora = new Calculadora(numero1, numero2);
                     System.out.println("El resultado de la operacion es: "+ calculadora.Resta());
                     break;
-                case 3: 
+                case 'c': 
                     System.out.println("Ingrese un numero: ");
                     numero1 = scanner.nextFloat();
     
@@ -55,7 +55,7 @@ public class Main{
                     calculadora = new Calculadora(numero1, numero2);
                     System.out.println("El resultado de la operacion es: "+ calculadora.Multiplicar());
                     break;
-                case 4:
+                case 'd':
                     System.out.println("Ingrese un numero: ");
                     numero1 = scanner.nextFloat();
     
@@ -65,7 +65,7 @@ public class Main{
                     calculadora = new Calculadora(numero1, numero2);
                     System.out.println("El resultado de la operacion es: "+ calculadora.Dividir());
                     break;
-                case 5:
+                case 'f':
                     System.out.println("Adios");
                     salir = true;
                     break;
