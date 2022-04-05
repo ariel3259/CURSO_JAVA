@@ -12,19 +12,25 @@ class Main{
         //de la a a la l por cantidad de letras
         //de la l a la z de manera alfabetico
 
-        String[] arregloDeTexto = {"coder", "devplace", "personas", "cursos", "alumnos"};
+        String[] arregloDeTexto = {"coder", "devplace", "personas", "cursos", "alumnos", "leon", "zota"};
 
-        List<String> arregloOrdenadoPorCantidadDeLetras = new LinkedList<>();
+        ordenarFila(arregloDeTexto);
 
-        int a = (int) 'a', l = (int) 'l', z = (int) 'z' ;
+    }
 
-        for(int i = 0; i < arregloDeTexto.length; i++){
-            int letra = (int) arregloDeTexto[i].charAt(1);
-            if((letra >= a) && (letra <= l )){
-
+    public static void ordenarFila(String[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i].length() > array[j].length()) {
+                    String temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
             }
         }
 
-
+        for(String cadena: array){
+            System.out.println(cadena);
+        }
     }
 }
