@@ -26,7 +26,7 @@ public class Main {
         scan.close();
         muestraMaxima(temperatura);
         muestraMinima(temperatura);
-
+        temperaturaPromedio(temperatura);
 
 
     }
@@ -56,6 +56,15 @@ public class Main {
         }
        System.out.println("la temperatura maxima es: "+temperaturaMin);
        System.out.println("la hora de la temperatura maxima es: "+horaMin*4);
+    }
+    
+    public static void temperaturaPromedio(int[] temperatura){
+        int temperaturaPromedio = 0;
+        for(int i=0; i < temperatura.length; i++){
+            temperaturaPromedio+=temperatura[i];
+        }
+
+        System.out.println("Temperatura promedio: "+(temperaturaPromedio/temperatura.length));
     }
 
 }
