@@ -1,4 +1,4 @@
-package lectura;
+package lectura.ArreglosYBucles;
 
 import java.util.Scanner;
 
