@@ -68,23 +68,23 @@ public class Menu{
         while(!getOut){
             Articles article;
          
-            System.out.println("1- Add an user");
-            System.out.println("2- Deletes last user");
-            System.out.println("3- Show last user");
+            System.out.println("1- Add an article");
+            System.out.println("2- Deletes last article");
+            System.out.println("3- Show last article");
             System.out.println("4- Exit");
             opc = sc.nextInt();
             switch(opc){
                 case 1:
                     sc.nextLine();  
-                    System.out.println("Write user's name");
+                    System.out.println("Write article's name");
                     name = sc.nextLine();
 
                     sc.nextLine();  
-                    System.out.println("Write user's last name");
+                    System.out.println("Write article's price");
                     price = sc.nextDouble();
 
                     sc.nextLine();  
-                    System.out.println("Write user's email");
+                    System.out.println("Write article's stock");
                     stock = sc.nextInt();
 
                     article = new Articles(name, price, stock);
