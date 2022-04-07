@@ -33,9 +33,9 @@ public class VehiculoCarga extends Vehiculo {
             return super.toString();
         }
         return "VehiculoCarga{" +
-                "remolque=" + remolque +
-                ";matricula="+ matricula+
-                ";velocidad="+ velocidad+
+                "remolque=" + remolque +","+
+                "matricula="+ matricula +","+
+                "velocidad="+ velocidad +","+
                 '}';
     }
 }

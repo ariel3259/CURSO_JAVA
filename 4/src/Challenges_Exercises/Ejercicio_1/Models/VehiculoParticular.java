@@ -18,7 +18,6 @@ public class VehiculoParticular extends Vehiculo {
 
     public int mostrarPuertas(){
         return this.numeroDePuertas;
-
     }
 
     /**
