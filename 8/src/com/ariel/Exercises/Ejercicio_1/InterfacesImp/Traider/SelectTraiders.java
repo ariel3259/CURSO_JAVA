@@ -1,51 +1,51 @@
-package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client;
+package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Traider;
 
 import com.ariel.Exercises.Ejercicio_1.Db.ConnectDB;
 import com.ariel.Exercises.Ejercicio_1.Interfaces.ISelect;
-import com.ariel.Exercises.Ejercicio_1.Models.Client;
+import com.ariel.Exercises.Ejercicio_1.Models.Traider;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectClient implements ISelect<Client> {
+public class SelectTraiders implements ISelect<Traider> {
 
     private final ConnectDB con;
     private final String query;
-    private static SelectClient instance;
+    private static SelectTraiders instance;
 
-    private SelectClient(){
+    private SelectTraiders(){
         con = new ConnectDB();
-        query = "SELECT * FROM `client` WHERE `deleted`='N'";
+        query = "SELECT * FROM `traider` WHERE `deleted` = 'N'";
     }
 
-    public static SelectClient getInstance(){
+    public static SelectTraiders getInstance(){
         if(instance == null){
-            instance = new SelectClient();
+            instance = new SelectTraiders();
         }
         return instance;
     }
 
     @Override
-    public List<Client> getElements() {
-        List<Client> clients = new ArrayList<>();
+    public List<Traider> getElements() {
         con.createConnection();
+        List<Traider> traiders = new ArrayList<>();
         try{
             Statement stm = con.getCon().createStatement();
             ResultSet rs = stm.executeQuery(query);
-
             while(rs.next()){
-                clients.add(new Client(
+                traiders.add(new Traider(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(5),
                         rs.getInt(4),
-                        rs.getDate(7)
+                        rs.getString(5),
+                        rs.getDouble(7),
+                        rs.getDate(8)
                 ));
             }
-
-            return clients;
+            return traiders;
         }catch (Exception e){
             System.out.println("Something is wrong: ");
             System.out.println(e.getMessage());

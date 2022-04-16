@@ -1,51 +1,48 @@
-package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client;
+package com.ariel.Exercises.Ejercicio_1.InterfacesImp.InvoicingProducts;
 
 import com.ariel.Exercises.Ejercicio_1.Db.ConnectDB;
 import com.ariel.Exercises.Ejercicio_1.Interfaces.ISelect;
-import com.ariel.Exercises.Ejercicio_1.Models.Client;
+import com.ariel.Exercises.Ejercicio_1.Models.InvoicingProducts;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectClient implements ISelect<Client> {
+public class SelectInvoicingProducts implements ISelect<InvoicingProducts> {
 
     private final ConnectDB con;
     private final String query;
-    private static SelectClient instance;
+    private static SelectInvoicingProducts instance;
 
-    private SelectClient(){
+    private SelectInvoicingProducts(){
         con = new ConnectDB();
-        query = "SELECT * FROM `client` WHERE `deleted`='N'";
+        query = "SELECT * FROM `invoicing_products`";
     }
 
-    public static SelectClient getInstance(){
+    public static SelectInvoicingProducts getInstance(){
         if(instance == null){
-            instance = new SelectClient();
+            instance = new SelectInvoicingProducts();
         }
         return instance;
     }
 
     @Override
-    public List<Client> getElements() {
-        List<Client> clients = new ArrayList<>();
+    public List<InvoicingProducts> getElements() {
         con.createConnection();
-        try{
+        List<InvoicingProducts> invoicingProducts = new ArrayList<>();
+        try {
             Statement stm = con.getCon().createStatement();
             ResultSet rs = stm.executeQuery(query);
-
             while(rs.next()){
-                clients.add(new Client(
+                invoicingProducts.add(new InvoicingProducts(
                         rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(5),
-                        rs.getInt(4),
-                        rs.getDate(7)
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4)
                 ));
             }
-
-            return clients;
+            return invoicingProducts;
         }catch (Exception e){
             System.out.println("Something is wrong: ");
             System.out.println(e.getMessage());

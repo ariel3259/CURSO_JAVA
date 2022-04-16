@@ -10,15 +10,24 @@ import com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client.SelectClient;
 import com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client.UpdateClient;
 import com.ariel.Exercises.Ejercicio_1.Models.Client;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProgramClient {
 
-    private Scanner sc;
+    private final Scanner sc;
+    private static ProgramClient instance;
 
-    public ProgramClient(){
+    private ProgramClient(){
         sc = new Scanner(System.in);
+    }
+
+    public static ProgramClient getInstance(){
+        if(instance == null){
+            instance = new ProgramClient();
+        }
+        return instance;
     }
 
     public void ShowClients(){
@@ -49,8 +58,7 @@ public class ProgramClient {
         String name;
         String lastName;
         String address;
-        int dni;
-        String yearOfBorn;
+        int dni, year, month, day;
 
         System.out.println("Insert name: ");
         name = sc.next();
@@ -66,11 +74,16 @@ public class ProgramClient {
         System.out.println("Insert dni with no point: ");
         dni = sc.nextInt();
 
-        sc.nextLine();
-        System.out.println("Insert your year of born");
-        yearOfBorn = sc.nextLine();
+        System.out.println("Insert client's year of born of the : ");
+        year = sc.nextInt();
 
-        insertClient.insertElement(new Client(name, lastName, address, dni, yearOfBorn));
+        System.out.println("Insert client's month of born: ");
+        month = sc.nextInt();
+
+        System.out.println("Insert client's day of born: ");
+        day = sc.nextInt();
+
+        insertClient.insertElement(new Client(name, lastName, address, dni, Date.valueOf(year+"-"+month+"-"+day)));
     }
 
     public void updateClient(){
@@ -78,9 +91,7 @@ public class ProgramClient {
         String name;
         String lastName;
         String address;
-        int dni;
-        String yearOfBorn;
-        int id;
+        int dni, id, year, month, day;
 
         System.out.println("Insert id: ");
         id = sc.nextInt();
@@ -99,11 +110,16 @@ public class ProgramClient {
         System.out.println("Insert dni with no point: ");
         dni = sc.nextInt();
 
-        sc.nextLine();
-        System.out.println("Insert your year of born");
-        yearOfBorn = sc.nextLine();
+        System.out.println("Insert client's year of born of the : ");
+        year = sc.nextInt();
 
-        updateClient.updateElement(new Client(id, name, lastName, address, dni, yearOfBorn));
+        System.out.println("Insert client's month of born: ");
+        month = sc.nextInt();
+
+        System.out.println("Insert client's day of born: ");
+        day = sc.nextInt();
+
+        updateClient.updateElement(new Client(id, name, lastName, address, dni, Date.valueOf(year+"-"+month+"-"+day)));
     }
 
     public void deleteClient(){

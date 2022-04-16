@@ -1,51 +1,48 @@
-package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client;
+package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Invoicing;
 
 import com.ariel.Exercises.Ejercicio_1.Db.ConnectDB;
 import com.ariel.Exercises.Ejercicio_1.Interfaces.ISelect;
-import com.ariel.Exercises.Ejercicio_1.Models.Client;
+import com.ariel.Exercises.Ejercicio_1.Models.Invoicing;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectClient implements ISelect<Client> {
+public class SelectInvoicing implements ISelect<Invoicing> {
 
     private final ConnectDB con;
     private final String query;
-    private static SelectClient instance;
+    private static SelectInvoicing instance;
 
-    private SelectClient(){
+    private SelectInvoicing(){
         con = new ConnectDB();
-        query = "SELECT * FROM `client` WHERE `deleted`='N'";
+        query = "SELECT * FROM `invoicing`";
     }
 
-    public static SelectClient getInstance(){
+    public static SelectInvoicing getInstance(){
         if(instance == null){
-            instance = new SelectClient();
+            instance = new SelectInvoicing();
         }
         return instance;
     }
 
     @Override
-    public List<Client> getElements() {
-        List<Client> clients = new ArrayList<>();
+    public List<Invoicing> getElements() {
         con.createConnection();
+        List<Invoicing> invoicings = new ArrayList<>();
         try{
             Statement stm = con.getCon().createStatement();
             ResultSet rs = stm.executeQuery(query);
-
             while(rs.next()){
-                clients.add(new Client(
+                invoicings.add(new Invoicing(
                         rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(5),
-                        rs.getInt(4),
-                        rs.getDate(7)
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4)
                 ));
             }
-
-            return clients;
+            return invoicings;
         }catch (Exception e){
             System.out.println("Something is wrong: ");
             System.out.println(e.getMessage());

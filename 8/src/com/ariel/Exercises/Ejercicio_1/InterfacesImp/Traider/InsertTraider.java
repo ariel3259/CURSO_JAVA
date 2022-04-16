@@ -1,39 +1,40 @@
-package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client;
+package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Traider;
 
 import com.ariel.Exercises.Ejercicio_1.Db.ConnectDB;
 import com.ariel.Exercises.Ejercicio_1.Interfaces.IInsert;
-import com.ariel.Exercises.Ejercicio_1.Models.Client;
+import com.ariel.Exercises.Ejercicio_1.Models.Traider;
 
 import java.sql.PreparedStatement;
 
-public class InsertClient implements IInsert<Client> {
+public class InsertTraider implements IInsert<Traider> {
 
     private final ConnectDB con;
     private final String query;
-    private static InsertClient instance;
+    private static InsertTraider instance;
 
-    private InsertClient(){
+    private InsertTraider(){
         con = new ConnectDB();
-        query = "INSERT INTO `client`(`name`, `last_name`, `address`, `dni`, `year_of_born`, `deleted` ) VALUE(?, ?, ?, ?, ?, 'N')";
+        query = "INSERT INTO `traider`(`name`, `last_name`, `address`, `dni`, `salary`, `year_of_born`, `deleted`) VALUE (?, ?, ?, ?, ?, ?, 'N')";
     }
 
-    public static InsertClient getInstance(){
+    public static InsertTraider getInstance(){
         if(instance == null){
-            instance = new InsertClient();
+            instance = new InsertTraider();
         }
         return instance;
     }
 
     @Override
-    public void insertElement(Client element) {
+    public void insertElement(Traider element) {
         con.createConnection();
-        try{
+        try {
             PreparedStatement ps = con.getCon().prepareStatement(query);
             ps.setString(1, element.getName());
             ps.setString(2, element.getLastName());
             ps.setString(3, element.getAddress());
             ps.setInt(4, element.getDni());
-            ps.setDate(5, element.getYearOfBorn());
+            ps.setDouble(5, element.getSalary());
+            ps.setDate(6, element.getYearOfBorn());
             ps.executeUpdate();
         }catch (Exception e){
             System.out.println("Something is wrong: ");

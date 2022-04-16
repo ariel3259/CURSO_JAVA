@@ -33,7 +33,7 @@ public class UpdateClient implements IUpdate<Client> {
             ps.setString(2, element.getLastName());
             ps.setString(3, element.getAddress());
             ps.setInt(4, element.getDni());
-            ps.setString(5, element.getYearOfBorn());
+            ps.setDate(5, element.getYearOfBorn());
             ps.setInt(6, element.getId());
             ps.executeUpdate();
         }catch (Exception e){

@@ -1,31 +1,31 @@
-package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Client;
+package com.ariel.Exercises.Ejercicio_1.InterfacesImp.Traider;
 
 import com.ariel.Exercises.Ejercicio_1.Db.ConnectDB;
-import com.ariel.Exercises.Ejercicio_1.Interfaces.IInsert;
-import com.ariel.Exercises.Ejercicio_1.Models.Client;
+import com.ariel.Exercises.Ejercicio_1.Interfaces.IUpdate;
+import com.ariel.Exercises.Ejercicio_1.Models.Traider;
 
 import java.sql.PreparedStatement;
 
-public class InsertClient implements IInsert<Client> {
+public class UpdateTraider implements IUpdate<Traider> {
 
     private final ConnectDB con;
     private final String query;
-    private static InsertClient instance;
+    private static UpdateTraider instance;
 
-    private InsertClient(){
+    private UpdateTraider(){
         con = new ConnectDB();
-        query = "INSERT INTO `client`(`name`, `last_name`, `address`, `dni`, `year_of_born`, `deleted` ) VALUE(?, ?, ?, ?, ?, 'N')";
+        query = "UPDATE `traider` SET `name` = ?, `last_name` = ?, `address` = ?, `dni` = ?, `salary` = ?, `year_of_born` = ? WHERE `id` = ? ";
     }
 
-    public static InsertClient getInstance(){
+    public static UpdateTraider getInstance(){
         if(instance == null){
-            instance = new InsertClient();
+            instance = new UpdateTraider();
         }
         return instance;
     }
 
     @Override
-    public void insertElement(Client element) {
+    public void updateElement(Traider element) {
         con.createConnection();
         try{
             PreparedStatement ps = con.getCon().prepareStatement(query);
@@ -33,11 +33,14 @@ public class InsertClient implements IInsert<Client> {
             ps.setString(2, element.getLastName());
             ps.setString(3, element.getAddress());
             ps.setInt(4, element.getDni());
-            ps.setDate(5, element.getYearOfBorn());
+            ps.setDouble(5, element.getSalary());
+            ps.setDate(6, element.getYearOfBorn());
+            ps.setInt(7, element.getId());
             ps.executeUpdate();
         }catch (Exception e){
             System.out.println("Something is wrong: ");
             System.out.println(e.getMessage());
+
         }
     }
 }
