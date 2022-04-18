@@ -1,4 +1,4 @@
-package com.ariel.lectura.MongoConnect;
+package com.ariel.lectura.Lectura.MongoConnect;
 
 
 import com.mongodb.client.*;
