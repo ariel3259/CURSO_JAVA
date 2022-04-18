@@ -14,7 +14,7 @@ public class InsertProduct implements IInsert<Products> {
 
     private InsertProduct(){
         con = new ConnectDB();
-        query = "INSERT INTO `products`(`code_product`, `name`, `price`, `stock`, `min_stock`, `deleted`) VALUE (?, ?, ?, ?, ?, 'N')";
+        query = "INSERT INTO `products`(`product_code`, `name`, `price`, `stock`, `min_stock`, `deleted`) VALUE (?, ?, ?, ?, ?, 'N')";
     }
 
     public static InsertProduct getInstance(){

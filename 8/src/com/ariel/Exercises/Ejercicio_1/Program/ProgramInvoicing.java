@@ -41,6 +41,7 @@ public class ProgramInvoicing {
                 System.out.println("\t\tId client: " + invoicing.getIdClient() + ",");
                 System.out.println("\t\tId trader: " + invoicing.getIdTrader() + ",");
                 System.out.println("\t\tTotal price: " + invoicing.getTotalPrice() + ",");
+                System.out.println("\t\tBought date: " + invoicing.getBoughtDate());
                 System.out.println("\t},");
             }
             System.out.println("]");

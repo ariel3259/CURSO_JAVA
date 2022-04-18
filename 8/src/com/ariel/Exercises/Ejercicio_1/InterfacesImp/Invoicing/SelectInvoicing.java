@@ -37,9 +37,10 @@ public class SelectInvoicing implements ISelect<Invoicing> {
             while(rs.next()){
                 invoicings.add(new Invoicing(
                         rs.getInt(1),
-                        rs.getInt(2),
                         rs.getInt(3),
-                        rs.getInt(4)
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(2)
                 ));
             }
             return invoicings;

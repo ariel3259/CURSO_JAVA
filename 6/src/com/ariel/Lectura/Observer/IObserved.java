@@ -1,6 +1,6 @@
 package com.ariel.Lectura.Observer;
 
-public interface Observed {
+public interface IObserved {
 
     //Añadir un observador
     public void attach(IObserver observer);

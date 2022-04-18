@@ -56,7 +56,7 @@ public class ProgramInvoicingProducts {
         System.out.println("Id invoice: ");
         idInvoice = sc.nextInt();
 
-        System.out.println("Id client: ");
+        System.out.println("Id product: ");
         idProduct = sc.nextInt();
 
         System.out.println("Items: ");

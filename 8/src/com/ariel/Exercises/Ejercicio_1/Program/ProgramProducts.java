@@ -40,6 +40,7 @@ public class ProgramProducts {
             System.out.println("[");
             for (Products product: products){
                 System.out.println("\t{");
+                System.out.println("\t\tId: " + product.getId() + ",");
                 System.out.println("\t\tCode product: " + product.getCodeProduct() + ",");
                 System.out.println("\t\tName product: " + product.getName() + ",");
                 System.out.println("\t\tPrice: " + product.getPrice() + ",");

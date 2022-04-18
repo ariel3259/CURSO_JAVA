@@ -25,7 +25,7 @@ public class SelectProducts implements ISelect<Products> {
         if(instance == null){
             instance = new SelectProducts();
         }
-        return null;
+        return instance;
     }
 
     @Override
@@ -51,5 +51,10 @@ public class SelectProducts implements ISelect<Products> {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+ " Initialized";
     }
 }

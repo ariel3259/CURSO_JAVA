@@ -14,7 +14,7 @@ public class InsertInvoicing implements IInsert<Invoicing> {
 
     private InsertInvoicing(){
         con = new ConnectDB();
-        query = "INSERT INTO `invoicing`(`idClient`, `idTrader`, `total_price`) VALUE(?, ?, 0)";
+        query = "INSERT INTO `invoicing`(`id_client`, `id_traider`, `total_price`, `date_bought`) VALUE(?, ?, 0, CURRENT_DATE)";
     }
 
     public static InsertInvoicing getInstance(){
