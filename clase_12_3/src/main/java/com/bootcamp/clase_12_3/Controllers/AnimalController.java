@@ -15,7 +15,8 @@ public class AnimalController {
     };
 
     @PostMapping("/save_animal")
-    public Animales saveAnimal(@RequestBody Animales animal){
+    public Animales saveAnimal(@RequestBody Animales animal, String texto){
+        System.out.println(texto);
         animal.setId(animales.length + 1);
         return animal;
     }
