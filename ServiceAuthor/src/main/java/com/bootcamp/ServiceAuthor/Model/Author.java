@@ -1,12 +1,12 @@
-package com.ariel.Model;
+package com.bootcamp.ServiceAuthor.Model;
 
-public class Users {
+public class Author {
     private Integer id;
     private String name;
     private String lastName;
     private Integer dni;
 
-    public Users(int id, String name, String lastName, int dni){
+    public Author(int id, String name, String lastName, int dni){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -17,7 +17,7 @@ public class Users {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,7 +41,7 @@ public class Users {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 }
