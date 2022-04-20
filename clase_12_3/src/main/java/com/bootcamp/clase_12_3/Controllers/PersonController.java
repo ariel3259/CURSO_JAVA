@@ -14,18 +14,18 @@ public class PersonController {
             new Person(4, "Lindsay", "Ferguson")
     };
 
-    @PostMapping("/save_person")
+    @PostMapping("/save/person")
     public Person savePerson(@RequestBody Person person){
         person.setId(people.length + 1);
         return person;
     }
 
-    @GetMapping("/get_all_people")
+    @GetMapping("/get/all/people")
     public Person[] getAllPeople(){
         return people;
     }
 
-    @GetMapping("/get_one_people/{id}")
+    @GetMapping("/get/one/people/{id}")
     public Person getOnePerson(@PathVariable(name = "id") int id){
         if(((id - 1) > (people.length - 1)) || ((id - 1) < 0)){
             return new Person(0, null, null);
