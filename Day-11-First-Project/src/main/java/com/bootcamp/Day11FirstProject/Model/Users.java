@@ -6,6 +6,10 @@ public class Users {
     private String lastName;
     private Integer dni;
 
+    public Users() {
+    	
+    }
+    
     public Users(String name, String lastName, Integer dni){
         this.name = name;
         this.lastName = lastName;
