@@ -28,8 +28,8 @@ public class UsersService {
 	
 	/**
 	 * 
-	 * @param dni to find an user
-	 * @return 
+	 * @param dni to find a user
+	 * @return a user
 	 */
 	public Users getUserByDni(int dni) {
 		String querySelectByDni = "SELECT * FROM `users` WHERE `dni` = ?";

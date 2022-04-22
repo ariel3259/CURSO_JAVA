@@ -1,9 +1,14 @@
 package com.bootcamp.Day11FirstProject.Model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Users {
     private Integer id;
+    @ApiModelProperty(required = true)
     private String name;
+    @ApiModelProperty(required = true)
     private String lastName;
+    @ApiModelProperty(required = true)
     private Integer dni;
 
     public Users() {
