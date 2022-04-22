@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/articles")
-public class ArticlesPort
+public class ArticlesAdapter
         implements
         IPortGet<Iterable<Articles>>,
         IPortPost<Articles, String>,
