@@ -31,12 +31,12 @@ public class FurnitureController {
     public ResponseEntity<String> modifyFurniture(@RequestBody FurnitureEntity furniture, @PathVariable("id") int id){
         furniture.setId(id);
         if(!fs.updateFurniture(furniture)) return ResponseEntity.status(400).body("Failed to update a furniture");
-        return ResponseEntity.status(201).body("Modified a furniture");
+        return ResponseEntity.status(200).body("Modified a furniture");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFurniture(@PathVariable("id") int id){
         if(!fs.deleteFurniture(id)) return ResponseEntity.status(400).body("Failed to delete a furniture");
-        return ResponseEntity.status(201).body("Deleted a furniture");
+        return ResponseEntity.status(200).body("Deleted a furniture");
     }
 }

@@ -1,5 +1,6 @@
 package com.bootcamp.ApiCrud.Entity;
 
+import com.bootcamp.ApiCrud.Model.ArmChair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArmChairEntity {
+public class ArmChairEntity extends ArmChair {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter
     private int id;

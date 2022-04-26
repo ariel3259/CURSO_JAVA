@@ -30,13 +30,13 @@ public class ArmChairController {
     public ResponseEntity<String> putArmChair(@RequestBody ArmChairEntity armChair, @PathVariable("id") int id){
         armChair.setId(id);
         if(!acs.updateArmChair(armChair)) return ResponseEntity.status(400).body("Failed to update a armchair");
-        return ResponseEntity.status(201).body("Update armchair");
+        return ResponseEntity.status(200).body("Update armchair");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteArmChair(@PathVariable("id") int id){
         if(!acs.deleteArmChair(id)) return ResponseEntity.status(400).body("Failed to delete a armchair");
-        return ResponseEntity.status(201).body("Delete armchair");
+        return ResponseEntity.status(200).body("Delete armchair");
     }
 
 }
