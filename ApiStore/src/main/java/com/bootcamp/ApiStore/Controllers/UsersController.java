@@ -1,8 +1,9 @@
 package com.bootcamp.ApiStore.Controllers;
 
 import com.bootcamp.ApiStore.Model.Users;
-import com.bootcamp.ApiStore.Requests.LoginRequest;
+import com.bootcamp.ApiStore.Utils.JwtRequest;
 import com.bootcamp.ApiStore.Services.UsersService;
+import com.bootcamp.ApiStore.Utils.JwtResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -39,8 +40,8 @@ public class UsersController {
             @ApiResponse(code = 201, response = String.class, message = "Valid user"),
             @ApiResponse(code = 400, response = String.class, message = "Invalid user")
     })
-    public ResponseEntity<String> auth(@Valid @RequestBody LoginRequest login){
-        if(!us.Auth(login)) return ResponseEntity.status(400).body("Wrong email or password");
-        return ResponseEntity.status(201).body("Congratulations");
+    public ResponseEntity<?> auth(@Valid @RequestBody JwtRequest request) throws  Exception{
+        String token = us.Auth(request);
+        return ResponseEntity.status(201).body(new JwtResponse(token));
     }
 }
