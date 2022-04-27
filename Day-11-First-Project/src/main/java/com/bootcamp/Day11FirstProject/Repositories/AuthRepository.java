@@ -1,2 +1,14 @@
-package com.bootcamp.Day11FirstProject.Repositories;public class AuthRepository {
+package com.bootcamp.Day11FirstProject.Repositories;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class AuthRepository {
+
+    @Autowired
+    private JdbcTemplate jdbc;
+
+
 }
