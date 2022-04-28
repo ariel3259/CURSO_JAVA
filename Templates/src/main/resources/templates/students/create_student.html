@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Create Student</title>
+	</head>
+	<body>
+		<form th:acction="@{/students/create}" th:object="${student}" method="post">
+			<label>Name: </label>
+			<input type="text" name="name" th:field="*{name}"/>
+			<br>
+			<label>Last name: </label>
+			<input type="text" name="lastName" th:field="*{lastName}"/>
+			<br>
+			<label>Phone: </label>
+			<input type="number" name="phone" th:field="*{phone}"/>
+			<br>
+			<label>Dni: </label>
+			<input type="number" name="dni" th:field="*{dni}"/>
+			<br>
+			<button type="submit">
+				Create student
+			</button>
+		</form>
+		<a th:href="@{/students}">Go back</a>
+	</body>
+</html>

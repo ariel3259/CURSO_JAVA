@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Update user</title>
 	</head>
 	<body>
-		<form th:acction="@{/update/{id}(id = user.id)}" th:object="${user}" method="post">
+		<form th:object="${user}" th:acction="@{/update/{id}(id = user.id)}" method="post">
 			<label>Id: </label>
 			<input name="id" th:field="*{id}" />
 			<br>
@@ -24,6 +24,6 @@
 			</button>
 			<br>
 		</form>
-		<a th:href="@{/}">Go back</a>
+		<a th:href="@{/users}">Go back</a>
 	</body>
 </html>

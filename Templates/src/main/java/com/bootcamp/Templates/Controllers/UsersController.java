@@ -7,48 +7,54 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bootcamp.Templates.Model.Users;
 import com.bootcamp.Templates.Services.UsersService;
 
 @Controller
+@RequestMapping("/users")
 public class UsersController {
 
 	@Autowired
-	private UsersService us;
+	private UsersService usersService;
 	
 	@GetMapping
 	public String getAllUsers(Model model) {
 		
-		model.addAttribute("users", us.getAllUsers());
-		return "index";
+		model.addAttribute("users", usersService.getAllUsers());
+		return "/users/index";
 	}
 	
 	@GetMapping("/create") 
 	public String showFormUser(Model model) {
 		Users user = new Users();
 		model.addAttribute("user", user);
-		return "create_user";
+		return "/users/create_user";
 	}
 	
 	@PostMapping("/create")
 	public String saveUser(@ModelAttribute("user") Users user) {
-		if(user.getId() == 0) us.saveUser(user);
-		
-		return "redirect:/";
+		usersService.saveUser(user);
+		return "redirect:/users";
 	}
 	
 	@GetMapping("/update/{id}")
 	public String updateUser(@PathVariable("id") int id, Model model) {
-		Users user = us.getOneUser(id);
+		Users user = usersService.getOneUser(id);
 		model.addAttribute("user", user);
-		return "update_user";
+		return "/users/update_user";
 	}
 	
 	@PostMapping("/update/{id}")
-	public String updateUser(@ModelAttribute("user") Users user, @PathVariable("id") int id) {
-		user.setId(id);
-		us.saveUser(user);
-		return "redirect:/";
+	public String updateUser(@ModelAttribute("user") Users user) {
+		usersService.updateUser(user);
+		return "redirect:/users";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id") int id) {
+		usersService.deleteUser(id);
+		return "redirect:/users";
 	}
 }

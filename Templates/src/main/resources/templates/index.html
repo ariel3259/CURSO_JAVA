@@ -1,32 +1,14 @@
 <!DOCTYPE html>
-
-<html>
+<html xmlns="http://thymelead.org">
 	<head>
-		<title>Template Example</title>
+		<title>Menu</title>
 	</head>
 	<body>
-		<a th:href="@{/create}">Create an user</a>
-		<table>
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nombre<th>
-					<th>Email</th>
-					<th>Username</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="user: ${users}">
-					<td th:text="${user.id}"></td>
-					<td th:text="${user.name}"></td>
-					<td th:text="${user.email}"></td>
-					<td th:text="${user.username}"></td>
-					<td> 
-						<a th:href="@{/update/{id}(id = ${user.id})}">Edit</a>
-					 | Delete</td>
-				</tr>
-			</tbody>
-		</table>
+		<ul>
+			<li><a th:href="@{/users}">User Management</a></li>
+			<li><a th:href="@{/students}">Student Management</a></li>
+			<li> </li>
+			<li> </li>
+		</ul>
 	</body>
 </html>
