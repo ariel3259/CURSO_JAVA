@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	  layout:decorate="~{./layouts/skeleton}">
+	<head>
+		<title>Clients management</title>
+	</head>
+	<body>
+		<span layout:fragment="TITLE_PAGE">
+			Clients Management
+		</span>
+		<main layout:fragment="CONTENT_PAGE">
+			<a th:href="@{/clients/create}" class="btn btn-success m-2">Create client</a>
+			<table class="table table-hover table-dark table-responsive table-condensed">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Last name</th>
+						<th scope="col">Dni</th>
+						<th scope="col">Email</th>
+						<th scope="col">Address</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="client: ${clients}">
+						<td th:text="${client.id}" ></td>
+						<td th:text="${client.name}"></td>
+						<td th:text="${client.lastName}"></td>
+						<td th:text="${client.dni}"></td>
+						<td th:text="${client.email}"></td>
+						<td th:text="${client.address}"></td>
+						<td> 
+							<div class="btn-group">
+								<a class="btn btn-primary" th:href="@{/clients/update/{id}(id = ${client.id})}">Edit</a>
+								<a class="btn btn-danger" th:href="@{/clients/delete/{id}(id = ${client.id})}">Delete</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="alert alert-dismissible fade show" th:classappend="'alert-' + (${class != null}? ${class} : '')" th:if="${message != null}" role="alert" >
+  				<span th:text="${message}"></span>
+  				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</main>
+	</body>
+</html>
