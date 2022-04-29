@@ -9,32 +9,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bootcamp.StoreManagementMvc.Interfaces.IClientsService;
 import com.bootcamp.StoreManagementMvc.Model.Clients;
-import com.bootcamp.StoreManagementMvc.Repository.ClientsRepository;
+import com.bootcamp.StoreManagementMvc.Repository.ClientsRepositoryNoSql;
 
 @Service
 @Transactional
-@Component("jpa")
-public class ClientsService implements IClientsService {
+@Component("mon")
+public class ClientsServiceNoSql implements IClientsService{
 
 	@Autowired
-	private ClientsRepository clientsRepository;
+	private ClientsRepositoryNoSql clientsRepository;
 	
 	@Override
 	public List<Clients> getAll() {
-		return clientsRepository.findAll();
+		return (List<Clients>) clientsRepository.findAll();
 	}
 
 	@Override
 	public Clients getOne(int id) {
-		if(!clientsRepository.existsById(id)) return null;
 		return clientsRepository.findById(id).get();
 	}
 
 	@Override
 	public void save(Clients client) {
-		// TODO Auto-generated method stub
 		if(clientsRepository.existsByDni(client.getDni()) || clientsRepository.existsByEmail(client.getEmail())) return;
 		clientsRepository.save(client);
+	
 	}
 
 	@Override
@@ -45,9 +44,10 @@ public class ClientsService implements IClientsService {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 		if(!clientsRepository.existsById(id)) return;
 		clientsRepository.deleteById(id);
 	}
+	
+
 
 }

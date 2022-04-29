@@ -3,6 +3,7 @@ package com.bootcamp.StoreManagementMvc.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.bootcamp.StoreManagementMvc.Model.Clients;
 public class ClientsController {
 	
 	@Autowired
+	@Qualifier("jpa")
 	private IClientsService clientsService;
 	
 	@GetMapping
