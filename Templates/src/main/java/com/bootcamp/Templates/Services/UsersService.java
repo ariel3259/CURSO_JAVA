@@ -15,7 +15,7 @@ public class UsersService {
 	private UsersRepository usersRepository;
 	
 	public List<Users> getAllUsers(){
-		return (List<Users>) usersRepository.findAll();
+		return usersRepository.findAll();
 	}
 	
 	public Users getOneUser(int id) {

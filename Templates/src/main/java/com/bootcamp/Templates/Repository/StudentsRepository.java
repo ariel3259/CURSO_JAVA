@@ -8,4 +8,5 @@ import com.bootcamp.Templates.Model.Students;
 public interface StudentsRepository extends JpaRepository<Students, Integer> {
 	public boolean existsByPhone(int phone);
 	public boolean existsByDni(int dni);
+	public Students findByDni(int dni);
 }

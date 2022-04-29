@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Create register</title>
+	</head>
+	<body>
+		<form th:acction="@{/register/create}" th:object="${registerRequest}" method="post">
+			<label>Code subject: </label>
+			<input type="number" th:field="*{codeSubject}"/>
+			<br>
+			<label>Dni student: </label>
+			<input type="number" th:field="*{dniStudent}"/>
+			<br>
+			<button type="submit">
+				Create
+			</button>
+		</form>
+		<a th:href="@{/register}">Go back</a>
+	</body>
+</html>

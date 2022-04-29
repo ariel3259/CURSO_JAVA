@@ -15,7 +15,7 @@ public class StudentsService {
 	private StudentsRepository studentsRepository;
 	
 	public List<Students> GetAllSudents(){
-		return (List<Students>) studentsRepository.findAll();
+		return studentsRepository.findAll();
 	}
 	
 	public boolean saveStudents(Students student) {

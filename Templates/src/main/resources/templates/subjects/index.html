@@ -21,7 +21,10 @@
 					<td th:text="${subject.id}"></td>
 					<td th:text="${subject.code}"></td>
 					<td th:text="${subject.name}"></td>
-					<td> Edit | Delete</td>
+					<td> 
+						<a th:href="@{/subjects/update/{id}(id = ${subject.id})}">Edit</a> | 
+					 	<a th:href="@{/subjects/delete/{id}(id = ${subject.id})}">Delete</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

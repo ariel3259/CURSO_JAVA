@@ -46,7 +46,7 @@ public class CarsController {
 		Cars car = carService.getOne(id);
 		model.addAttribute("car", car);
 		//System.out.println("Car added to model");
-		return "update_car";
+		return "/update_car";
 	}
 	
 	@PostMapping("/update/{id}")

@@ -15,7 +15,7 @@ public class SubjectsService {
 	private SubjectsRepository subjectsRepository;
 	
 	public List<Subjects> getAllSubjects(){
-		return (List<Subjects>) subjectsRepository.findAll();
+		return subjectsRepository.findAll();
 	}
 	
 	public Subjects getOne(int id) {
