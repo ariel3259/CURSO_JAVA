@@ -44,9 +44,8 @@ public class CarsController {
 	@GetMapping("/update/{id}")
 	public String showUpdateCar(Model model, @PathVariable("id") int id) {
 		Cars car = carService.getOne(id);
-		model.addAttribute("car", car);
-		//System.out.println("Car added to model");
-		return "/update_car";
+		model.addAttribute(car);
+		return "update_car";
 	}
 	
 	@PostMapping("/update/{id}")
