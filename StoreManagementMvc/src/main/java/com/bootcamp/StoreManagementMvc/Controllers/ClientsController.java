@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bootcamp.StoreManagementMvc.Interfaces.IClientsService;
+import com.bootcamp.StoreManagementMvc.Interfaces.IFileSystem;
 import com.bootcamp.StoreManagementMvc.Model.Clients;
 
 @Controller
@@ -21,14 +24,27 @@ import com.bootcamp.StoreManagementMvc.Model.Clients;
 public class ClientsController {
 	
 	@Autowired
-	@Qualifier("jpa")
 	private IClientsService clientsService;
+	
+	@Autowired
+	private IFileSystem  fs;
 	
 	@GetMapping
 	public String getAllClients(Model model) {
 		List<Clients> clients = clientsService.getAll();
 		model.addAttribute("clients", clients);
 		return "index";
+	}
+	
+	@PostMapping("/dni")
+	public String getClientByDni(Model model, @RequestParam("dni") String dni) {
+		if(dni.isEmpty()) {
+			model.addAttribute("client", null);
+			return "client_by_dni";
+		}
+		Clients client = clientsService.getOneByDni(Integer.parseInt(dni));
+		model.addAttribute("client", client);
+		return "client_by_dni";
 	}
 	
 	@GetMapping("/create")
@@ -39,8 +55,10 @@ public class ClientsController {
 	}
 	
 	@PostMapping("/create")
-	public String createClient(@ModelAttribute("client") Clients client, RedirectAttributes redirectAttributes) {
-		clientsService.save(client);
+	public String createClient(@ModelAttribute("client") Clients client, @RequestParam("imageFile") MultipartFile image,RedirectAttributes redirectAttributes) {
+		String imageName = fs.saveFile(image);
+		client.setImage(imageName);
+		clientsService.save(client);	
 		redirectAttributes.addFlashAttribute("message", "Created client");
 		redirectAttributes.addFlashAttribute("class", "success");
 		return "redirect:/clients";
@@ -67,4 +85,6 @@ public class ClientsController {
 		clientsService.delete(id);
 		return "redirect:/clients";
 	}
+	
+	
 }

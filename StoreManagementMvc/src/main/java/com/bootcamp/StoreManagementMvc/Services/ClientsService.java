@@ -13,7 +13,6 @@ import com.bootcamp.StoreManagementMvc.Repository.ClientsRepository;
 
 @Service
 @Transactional
-@Component("jpa")
 public class ClientsService implements IClientsService {
 
 	@Autowired
@@ -48,6 +47,12 @@ public class ClientsService implements IClientsService {
 		// TODO Auto-generated method stub
 		if(!clientsRepository.existsById(id)) return;
 		clientsRepository.deleteById(id);
+	}
+
+	@Override
+	public Clients getOneByDni(int dni) {
+		if(!clientsRepository.existsByDni(dni)) return null;
+		return clientsRepository.findByDni(dni);
 	}
 
 }

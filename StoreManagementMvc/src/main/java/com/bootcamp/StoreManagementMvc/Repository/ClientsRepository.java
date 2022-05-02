@@ -9,4 +9,5 @@ import com.bootcamp.StoreManagementMvc.Model.Clients;
 public interface ClientsRepository extends JpaRepository<Clients, Integer> {
 	public boolean existsByDni(int dni);
 	public boolean existsByEmail(String email);
+	public Clients findByDni(int dni);
 }

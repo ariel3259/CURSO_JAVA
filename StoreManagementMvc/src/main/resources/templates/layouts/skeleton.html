@@ -9,10 +9,27 @@
 		<nav class="navbar navbar-dark bg-dark">
   			<div class="container-fluid">
     			<span class="navbar-brand mb-0 h1" layout:fragment="TITLE_PAGE"></span>
+    			
   			</div>
 		</nav>
-		<main class="m-4 p-4" layout:fragment="CONTENT_PAGE">
-		</main>
+		<div class="container">
+			<div class="row">
+				<ul class="col m-5 p-5">
+					<li> <a th:href="@{/clients/create}" class="btn btn-success m-2">Create client</a> </li>
+					<li> <a th:href="@{/clients}" class="btn btn-primary">Main menu</a> </li>
+				</ul>
+				<div class="col">
+				</div>
+				<main class="col mt-5" layout:fragment="CONTENT_PAGE">
+				</main>
+	
+			</div>
+			<div class="row">
+				<footer class="col">
+					<h4>Author: Ariel</h4>
+				</footer>
+			<div/>
+		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	</body>
 </html>

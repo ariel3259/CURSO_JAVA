@@ -1,13 +1,13 @@
-package com.bootcamp.StoreManagementMvc;
+package com.bootcamp.VentaDeAutos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StoreManagementMvcApplication {
+public class VentaDeAutosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StoreManagementMvcApplication.class, args);
+		SpringApplication.run(VentaDeAutosApplication.class, args);
 	}
 
 }

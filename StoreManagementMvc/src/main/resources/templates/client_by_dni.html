@@ -11,12 +11,7 @@
 			Clients Management
 		</span>
 		<main layout:fragment="CONTENT_PAGE">
-			<form th:action="@{/clients/dni}" method="post" class="m-2">
-					<input type="number"  name="dni" placeholder="find by dni" required/>
-					<button type="submit" class="btn btn-sm btn-primary">
-						Find Client
-					</button>
-			</form>
+			<div th:if="${client != null}">
 			<table class="table table-hover table-dark table-responsive table-condensed">
 				<thead>
 					<tr>
@@ -30,7 +25,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="client: ${clients}">
+					<tr>
 						<td th:text="${client.id}" ></td>
 						<td th:text="${client.name}"></td>
 						<td th:text="${client.lastName}"></td>
@@ -46,10 +41,14 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="alert alert-dismissible fade show" th:classappend="'alert-' + (${class != null}? ${class} : '')" th:if="${message != null}" role="alert" >
-  				<span th:text="${message}"></span>
-  				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			 </div>
+			<div th:if="${client == null}">
+				<h1>
+					The client doesn't exists'
+				</h1>
 			</div>
+			
 		</main>
+
 	</body>
 </html>
