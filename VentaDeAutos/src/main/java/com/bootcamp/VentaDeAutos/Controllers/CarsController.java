@@ -14,8 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bootcamp.VentaDeAutos.Model.Cars;
 import com.bootcamp.VentaDeAutos.Model.SaleCar;
-import com.bootcamp.VentaDeAutos.Services.CarsService;
-import com.bootcamp.VentaDeAutos.Services.SaleCarService;
 
 @Controller
 @RequestMapping("/cars")
