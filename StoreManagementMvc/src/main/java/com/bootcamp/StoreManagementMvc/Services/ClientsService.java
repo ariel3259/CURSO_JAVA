@@ -30,23 +30,26 @@ public class ClientsService implements IClientsService {
 	}
 
 	@Override
-	public void save(Clients client) {
+	public boolean save(Clients client) {
 		// TODO Auto-generated method stub
-		if(clientsRepository.existsByDni(client.getDni()) || clientsRepository.existsByEmail(client.getEmail())) return;
+		if(clientsRepository.existsByDni(client.getDni()) || clientsRepository.existsByEmail(client.getEmail())) return false;
 		clientsRepository.save(client);
+		return true;
 	}
 
 	@Override
-	public void update(Clients client) {
-		if(!clientsRepository.existsById(client.getId())) return;
+	public boolean update(Clients client) {
+		if(!clientsRepository.existsById(client.getId())) return false;
 		clientsRepository.save(client);
+		return true;
 	}
 
 	@Override
-	public void delete(int id) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
-		if(!clientsRepository.existsById(id)) return;
+		if(!clientsRepository.existsById(id)) return false;
 		clientsRepository.deleteById(id);
+		return true;
 	}
 
 	@Override

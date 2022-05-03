@@ -21,7 +21,7 @@ public class FileSystemService implements IFileSystem{
 			Files.copy(image.getInputStream(), rootPath.resolve(image.getOriginalFilename()));
 			return image.getOriginalFilename();
 		}catch(IOException e) {
-			System.out.println("Error");
+			System.out.println("Error: "+e.getMessage());
 			return null;
 		}
 	}

@@ -2,10 +2,16 @@ package com.bootcamp.StoreManagementMvc.Controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +34,19 @@ public class ClientsController {
 	
 	@Autowired
 	private IFileSystem  fs;
+	
+	@Autowired
+	private ResourceLoader rl;
+	
+	@GetMapping("/images")
+	public ResponseEntity<?> getImage(String image) {
+		try {
+			return ResponseEntity.ok(rl.getResource("file:" + image));
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+
+	}
 	
 	@GetMapping
 	public String getAllClients(Model model) {
@@ -55,10 +74,17 @@ public class ClientsController {
 	}
 	
 	@PostMapping("/create")
-	public String createClient(@ModelAttribute("client") Clients client, @RequestParam("imageFile") MultipartFile image,RedirectAttributes redirectAttributes) {
+	public String createClient(@Validated @ModelAttribute("client") Clients client, BindingResult result, @RequestParam("imageFile") MultipartFile image,RedirectAttributes redirectAttributes) {
+		if(result.hasErrors()) {
+			return "create_client";
+		}
 		String imageName = fs.saveFile(image);
 		client.setImage(imageName);
-		clientsService.save(client);	
+		if(!clientsService.save(client)) {
+			redirectAttributes.addFlashAttribute("message", "The dni or the email already exists");
+			return "create_client";
+		}
+
 		redirectAttributes.addFlashAttribute("message", "Created client");
 		redirectAttributes.addFlashAttribute("class", "success");
 		return "redirect:/clients";
@@ -72,17 +98,30 @@ public class ClientsController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String updateClient(@ModelAttribute("client") Clients client, @PathVariable("id") int id, RedirectAttributes redirectAttributes ) {
+	public String updateClient(@Validated @ModelAttribute("client") Clients client, BindingResult result, @PathVariable("id") int id, RedirectAttributes redirectAttributes ) {
+		if(result.hasErrors()) {
+			return "/update/"+id;
+		}
 		client.setId(id);
-		clientsService.update(client);
+		if(!clientsService.update(client)) {
+			redirectAttributes.addFlashAttribute("message", "Failed to update a client");
+			return "update_client";
+		}
 		redirectAttributes.addFlashAttribute("message", "Updated client");
 		redirectAttributes.addFlashAttribute("class", "info");
 		return "redirect:/clients";
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String deleteClient(@PathVariable("id") int id) {
-		clientsService.delete(id);
+	public String deleteClient(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+		if(!clientsService.delete(id)) {
+			redirectAttributes.addFlashAttribute("message", "Client doesn't exists");
+			redirectAttributes.addFlashAttribute("class", "danger");
+		}
+		else {
+			redirectAttributes.addFlashAttribute("message", "Deleted client");
+			redirectAttributes.addFlashAttribute("class", "success");
+		}
 		return "redirect:/clients";
 	}
 	

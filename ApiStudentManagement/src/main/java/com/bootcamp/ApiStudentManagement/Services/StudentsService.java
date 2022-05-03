@@ -30,6 +30,18 @@ public class StudentsService {
 		return true;
 	}
 	
+	public boolean modifyName(String name, int id) {
+		if(!sr.existsById(id)) return false;
+		sr.modifyName(name, id);
+		return true;
+	}
+	
+	public boolean modifyUsername(String username, int id) {
+		if(!sr.existsById(id)) return false;
+		sr.modifyUsername(username, id);
+		return true;
+	}
+	
 	public boolean deleteStudent(int id) {
 		if(!sr.existsById(id)) return false;
 		sr.deleteById(id);

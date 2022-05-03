@@ -21,27 +21,37 @@
 				<thead>
 					<tr>
 						<th scope="col">Id</th>
+						<th>Image</th>
 						<th scope="col">Name</th>
 						<th scope="col">Last name</th>
 						<th scope="col">Dni</th>
 						<th scope="col">Email</th>
 						<th scope="col">Address</th>
+						
 						<th scope="col">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="client: ${clients}">
 						<td th:text="${client.id}" ></td>
+						<td th:if="${client.image != null}"><img th:src="@{/clients/images/{image} (image = ${client.image})}" /></td>
+						<td th:if="${client.image == null}">There's no image</td>
 						<td th:text="${client.name}"></td>
 						<td th:text="${client.lastName}"></td>
 						<td th:text="${client.dni}"></td>
 						<td th:text="${client.email}"></td>
-						<td th:text="${client.address}"></td>
+						<td th:utext="${client.address}"></td>
 						<td> 
 							<div class="btn-group">
 								<a class="btn btn-primary" th:href="@{/clients/update/{id}(id = ${client.id})}">Edit</a>
 								<a class="btn btn-danger" th:href="@{/clients/delete/{id}(id = ${client.id})}">Delete</a>
 							</div>
+						</td>
+					</tr>
+					
+					<tr th:if="${clients.isEmpty()}" style="text-align:center;">
+						<td colspan="7">
+							There's no clients
 						</td>
 					</tr>
 				</tbody>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,6 +49,20 @@ public class StudentsController {
 		student.setId(id);
 		if(!stse.modifyStudent(student)) return ResponseEntity.status(400).body("Failed to modify an user");
 		return ResponseEntity.status(200).body("Modified student");
+	}
+	
+	@PatchMapping("/name/{name}/{id}")
+	public ResponseEntity<String> modifyName(@PathVariable("name") String name, @PathVariable("id") String id){
+		if(name.isEmpty() || id.isEmpty()) return ResponseEntity.status(400).body("Incomplete data");
+		if(!stse.modifyName(name, Integer.parseInt(id))) return ResponseEntity.status(400).body("Student doesn't exists");
+		return ResponseEntity.status(200).body(" Modified student name");
+	}
+	
+	@PatchMapping("/username/{username}/{id}")
+	public ResponseEntity<String> modifyUsername(@PathVariable("username") String username, @PathVariable("id") String id){
+		if(username.isEmpty() || id.isEmpty()) return ResponseEntity.status(400).body("Incomplete data");
+		if(!stse.modifyUsername(username, Integer.parseInt(id))) return ResponseEntity.status(400).body("Student doesn't exists");
+		return ResponseEntity.status(200).body(" Modified student username");
 	}
 	
 	@DeleteMapping("/{id}")

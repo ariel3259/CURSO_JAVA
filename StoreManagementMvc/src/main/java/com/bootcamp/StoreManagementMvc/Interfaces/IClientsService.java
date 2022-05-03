@@ -8,7 +8,7 @@ public interface IClientsService {
 	public List<Clients> getAll();
 	public Clients getOne(int id);
 	public Clients getOneByDni(int dni);
-	public void save(Clients client);
-	public void update(Clients client);
-	public void delete(int id);
+	public boolean save(Clients client);
+	public boolean update(Clients client);
+	public boolean delete(int id);
 }
