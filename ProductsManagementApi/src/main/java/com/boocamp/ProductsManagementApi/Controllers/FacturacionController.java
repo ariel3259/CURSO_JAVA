@@ -31,6 +31,7 @@ public class FacturacionController {
 	
 	@PostMapping
 	public ResponseEntity<String> save(@RequestBody Facturacion client){
+		client.setState(true);
 		cs.save(client);
 		String message = "Saved client";
 		return ResponseEntity.status(201).body(message);
@@ -38,6 +39,7 @@ public class FacturacionController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<String> update(@RequestBody Facturacion client, @PathVariable("id") Long id){
+		client.setState(true);
 		client.setId(id);
 		cs.update(client);
 		String message = "Modify client";

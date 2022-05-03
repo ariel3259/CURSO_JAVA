@@ -2,6 +2,7 @@ package com.boocamp.ProductsManagementApi.Model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Facturacion {
 	private Clients client;
 	
 	@ManyToOne
-	private List<Products> product;
+	private Products product;
+	
 	private boolean state;
 }

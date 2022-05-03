@@ -1,5 +1,6 @@
 package com.boocamp.ProductsManagementApi.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,6 @@ public class Clients {
 	private Long id;
 	private String name;
 	private String lastName;
-	private String address; 
+	private String address;
 	private Boolean state;
 }

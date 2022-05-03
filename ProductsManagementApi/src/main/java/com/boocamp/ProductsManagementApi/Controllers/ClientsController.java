@@ -30,6 +30,7 @@ public class ClientsController {
 	
 	@PostMapping
 	public ResponseEntity<String> save(@RequestBody Clients client){
+		client.setState(true);
 		cs.save(client);
 		String message = "Saved client";
 		return ResponseEntity.status(201).body(message);
@@ -37,6 +38,7 @@ public class ClientsController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<String> update(@RequestBody Clients client, @PathVariable("id") Long id){
+		client.setState(true);
 		client.setId(id);
 		cs.update(client);
 		String message = "Modify client";
