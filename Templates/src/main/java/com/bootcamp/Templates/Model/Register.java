@@ -27,6 +27,8 @@ public class Register {
 	@ManyToOne
 	private Students student;
 	
+	private boolean state;
+	
 	public Register(Subjects su, Students stu) {
 		this.subject = su;
 		this.student = stu;

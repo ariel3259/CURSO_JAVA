@@ -1,16 +1,16 @@
-package com.bootcamp.Templates.Services;
+package com.bootcamp.Templates.Controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bootcamp.Templates.Repository.RegisterRepository;
-import com.bootcamp.Templates.Repository.StudentsRepository;
-import com.bootcamp.Templates.Repository.SubjectsRepository;
 import com.bootcamp.Templates.Model.Register;
+import com.bootcamp.Templates.Model.RegisterRepository;
 import com.bootcamp.Templates.Model.Students;
+import com.bootcamp.Templates.Model.StudentsRepository;
 import com.bootcamp.Templates.Model.Subjects;
+import com.bootcamp.Templates.Model.SubjectsRepository;
 
 @Service
 public class RegisterService {
@@ -34,6 +34,7 @@ public class RegisterService {
 		Subjects subject = subjectRepository.findByCode(codeSubject);
 		if(registerRepository.existsByStudent(student) && registerRepository.existsBySubject(subject)) return false;
 		Register register = new Register(subject, student);
+		register.setState(true);
 		registerRepository.save(register);
 		return true;
 	}

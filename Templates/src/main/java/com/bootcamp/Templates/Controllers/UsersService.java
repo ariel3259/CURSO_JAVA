@@ -1,4 +1,4 @@
-package com.bootcamp.Templates.Services;
+package com.bootcamp.Templates.Controllers;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.Templates.Model.Users;
-import com.bootcamp.Templates.Repository.UsersRepository;
+import com.bootcamp.Templates.Model.UsersRepository;
 
 @Service
 public class UsersService {
@@ -24,12 +24,14 @@ public class UsersService {
 	
 	public boolean saveUser(Users user) {
 		if(usersRepository.existsByUsername(user.getUsername())) return false;
+		user.setState(true);
 		usersRepository.save(user);
 		return true;
 	}
 	
 	public boolean updateUser(Users user) {
 		if(!usersRepository.existsById(user.getId())) return false;
+		user.setState(true);
 		usersRepository.save(user);
 		return true;
 	}

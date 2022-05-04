@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Create register</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
+	<section th:insert="Layouts/Layouts::nav"></section>
+	<div class="container">
 		<form th:acction="@{/register/create}" th:object="${registerRequest}" method="post">
 			<label>Code subject: </label>
-			<input type="number" th:field="*{codeSubject}"/>
+			<!-- <input class="form-control" type="number" th:field="*{codeSubject}"/> -->
+			<select >
+				<option th:each="subject: ${subjects}" th:value="${subject.code}" th:text="${subject.code}"></option>		
+			</select>
 			<br>
 			<label>Dni student: </label>
-			<input type="number" th:field="*{dniStudent}"/>
+			<!-- <input class="form-control" type="number" th:field="*{dniStudent}"/> -->
+			<select > 
+				<option th:each="student: ${students}" th:value="${student.dni}" th:text="${student.dni}"></option>
+			</select>
 			<br>
-			<button type="submit">
+			<button class="btn btn-light" type="submit">
 				Create
 			</button>
 		</form>
 		<a th:href="@{/register}">Go back</a>
+	</div>
 	</body>
 </html>

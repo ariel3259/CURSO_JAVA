@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bootcamp.Templates.Model.Students;
-import com.bootcamp.Templates.Services.StudentsService;
 
 @Controller
 @RequestMapping("/students")
@@ -36,7 +37,10 @@ public class StudentsController {
 	}
 	
 	@PostMapping("/create")
-	public String saveUserStudent(@ModelAttribute("student") Students student) {
+	public String saveUserStudent(@Validated @ModelAttribute("student") Students student, BindingResult result) {
+		if(result.hasErrors()) {
+			return "/students/crete_student";
+		}
 		studentService.saveStudents(student);
 		return "redirect:/students";
 	}
@@ -49,7 +53,10 @@ public class StudentsController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String modifyStudents(@ModelAttribute("student") Students student, @PathVariable("id") int id) {
+	public String modifyStudents(@Validated @ModelAttribute("student") Students student, BindingResult result , @PathVariable("id") int id) {
+		if(result.hasErrors()) {
+			return "/students/update_student";
+		}
 		student.setId(id);
 		studentService.updateStudent(student);
 		return "redirect:/students";

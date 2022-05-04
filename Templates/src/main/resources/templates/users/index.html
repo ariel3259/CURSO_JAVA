@@ -2,15 +2,19 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Template Example</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
-		<a th:href="@{/}">Go back to main page</a>
-		<a th:href="@{/users/create}">Create an user</a>
-		<table>
+	<section th:insert="Layouts/Layouts::nav"></section>
+	<div class="container">
+		<h1 style="text-aling: center">Users</h1>
+		<br><br>
+		<button class="btn btn-light"><a th:href="@{/users/create}">Create an user</a></button>
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Nombre<th>
+					<th>Nombre</th>
 					<th>Email</th>
 					<th>Username</th>
 					<th>Actions</th>
@@ -29,5 +33,6 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
 	</body>
 </html>

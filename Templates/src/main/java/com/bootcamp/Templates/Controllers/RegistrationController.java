@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bootcamp.Templates.Model.Register;
+import com.bootcamp.Templates.Model.Students;
+import com.bootcamp.Templates.Model.Subjects;
 import com.bootcamp.Templates.Requests.RegisterRequest;
-import com.bootcamp.Templates.Services.RegisterService;
 
 @Controller
 @RequestMapping("/register")
@@ -22,9 +23,16 @@ public class RegistrationController {
 	@Autowired
 	private RegisterService registerService;
 	
+	@Autowired
+	private SubjectsService subjectService;
+	
+	@Autowired
+	private StudentsService studentService;
+	
 	@GetMapping
 	public String getAllRegisters(Model model) {
 		List<Register> registers = registerService.getAll();
+		
 		model.addAttribute("registers", registers);
 		return "/register/index";
 	}
@@ -32,12 +40,16 @@ public class RegistrationController {
 	@GetMapping("/create")
 	public String showCreateRegister(Model model) {
 		RegisterRequest registerRequest = new RegisterRequest();
+		List<Subjects> subjects = subjectService.getAllSubjects();
+		List<Students> students = studentService.GetAllSudents();
+		model.addAttribute("subjects", subjects);
+		model.addAttribute("students", students);
 		model.addAttribute("registerRequest", registerRequest);
 		return "/register/create_register";
 	}
 	
 	@PostMapping("/create")
-	public String createRegister(@ModelAttribute("register") RegisterRequest registerRequest) {
+	public String createRegister(@ModelAttribute("registerRequest") RegisterRequest registerRequest) {
 		int dniStudent = registerRequest.getDniStudent();
 		int codeSubject = registerRequest.getCodeSubject();
 		registerService.save(codeSubject, dniStudent);
