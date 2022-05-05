@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layouts/skeleton}">
+	<head>
+		<title>Create user</title>
+	</head>
+	<body>
+		<a layout:fragment="TITLE">Create user</a>
+		<div layout:fragment="CONTENT">
+			<form th:action="@{/users/create}" th:object="${user}" method="post">
+				<div class="mb-3">
+					<label class="form-label">Nombre: </label>
+					<input type="text" class="form-control" name="name" th:field="*{name}"/>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Apellido: </label>
+					<input type="text" class="form-control" name="lastName" th:field="*{lastName}" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Telefono: </label>
+					<input type="number" class="form-control" name="phone" th:field=*{phone}/>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Dni: </label>
+					<input type="number" class="form-control" name="dni" th:field=*{dni}/>
+				</div>
+				<div class="mb-3 container align-items-center">
+					<button type="submit" class="btn btn-primary">Create</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
