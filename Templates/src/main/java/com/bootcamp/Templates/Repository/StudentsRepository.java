@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bootcamp.Templates.Model.Students;
+import com.bootcamp.Templates.Model.Users;
 
 @Repository
 public interface StudentsRepository extends JpaRepository<Students, Integer> {
@@ -35,6 +36,8 @@ public interface StudentsRepository extends JpaRepository<Students, Integer> {
 	@Query( value = "SELECT * FROM students s WHERE by s.name :order", countQuery = "SELECT count(*) FROM students", nativeQuery=true)
 	public Page<Students> findByOrder(@Param("order") String order, Pageable length);
 	
+	@Query( value = "SELECT * FROM students s WHERE s.state = true ORDER BY s.last_name asc", nativeQuery=true)
+	public List<Students> findByOrderAsc();
 	
 	@Modifying
 	@Query(value = "UPDATE students s SET s.state = false WHERE s.id = :id", nativeQuery=true)

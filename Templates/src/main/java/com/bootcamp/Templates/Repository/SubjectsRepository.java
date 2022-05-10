@@ -27,10 +27,9 @@ public interface SubjectsRepository extends JpaRepository<Subjects, Integer> {
 	//order values: 
 	//	asc = accendente
 	//	desc = descendant
-	@Query( value = "SELECT * FROM users WHERE users u by u.name :order", countQuery = "SELECT count(*) FROM users", nativeQuery=true)
+	@Query( value = "SELECT * FROM subjects s WHERE subjects s by s.name :order", countQuery = "SELECT count(*) FROM subjects", nativeQuery=true)
 	public Page<Users> findByOrder(@Param("order") String order, Pageable length);
-		
-	
+			
 	@Modifying
 	@Query(value = "UPDATE subjects s SET s.state = false WHERE s.id = :id ;", nativeQuery=true)
 	public void deleteById(@Param("id") int id);

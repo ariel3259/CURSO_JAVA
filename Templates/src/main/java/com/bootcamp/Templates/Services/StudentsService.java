@@ -42,6 +42,10 @@ public class StudentsService {
 		return studentsRepository.findByLastNameContaining(lastName, length);
 	}
 	
+	public List<Students> getOrderByLastName(){
+		return studentsRepository.findByOrderAsc();
+	}
+	
 	public boolean saveStudents(Students student) {
 		if(studentsRepository.existsByPhone(student.getPhone()) || studentsRepository.existsByDni(student.getDni())) return false;
 		student.setState(true);

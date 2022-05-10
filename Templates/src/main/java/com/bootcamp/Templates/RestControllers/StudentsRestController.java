@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.Templates.Model.Students;
 import com.bootcamp.Templates.ReporsConfigure.Excel.ExportExcelStudents;
+import com.bootcamp.Templates.ReporsConfigure.Pdf.ExportPdfStudents;
 import com.bootcamp.Templates.Services.StudentsService;
+import com.lowagie.text.DocumentException;
 
 @RestController
 @RequestMapping("/api/students")
@@ -57,6 +59,34 @@ public class StudentsRestController {
 		ExportExcelStudents excel = new ExportExcelStudents(students);
 		excel.CreateXcelFile(response);
 		
+	}
+	
+	@GetMapping("/pdf")
+	public void writePdfFile(HttpServletResponse response) throws IOException, DocumentException{
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment;filename=students.pdf");
+		List<Students> students = studentService.GetAllSudents();
+		ExportPdfStudents pdf = new ExportPdfStudents(students);
+		pdf.createPdfFile(response);
+	}
+	
+	@GetMapping("/excel/asc")
+	public void writeExcelFileAsc(HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename=students_asc.xlsx");
+		List<Students> students = studentService.getOrderByLastName();
+		ExportExcelStudents excel = new ExportExcelStudents(students);
+		excel.CreateXcelFile(response);
+		
+	}
+	
+	@GetMapping("/pdf/asc")
+	public void writePdfFileAsc(HttpServletResponse response) throws IOException, DocumentException{
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment;filename=students_asc.pdf");
+		List<Students> students = studentService.getOrderByLastName();
+		ExportPdfStudents pdf = new ExportPdfStudents(students);
+		pdf.createPdfFile(response);
 	}
 	
 	@GetMapping("/getOne/{id}")

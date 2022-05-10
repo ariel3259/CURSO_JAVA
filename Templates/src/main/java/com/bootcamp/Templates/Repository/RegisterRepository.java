@@ -30,8 +30,14 @@ public interface RegisterRepository extends JpaRepository<Register, Integer> {
 			 nativeQuery = true)
 	public Page<Register> findBySubjectName(@Param("subjectName") String subjectName, Pageable page);
 	
+
 	 @Query(
-			 value = "SELECT * FROM registration r INNER JOIN students s ON r.subject_id = s.id WHERE s.name = :studentName", 
+			 value = "SELECT * FROM registration r INNER JOIN subjects s ON r.subject_id = s.id WHERE s.name = :subjectID", 
+			 nativeQuery = true)
+	public List<Register> findByStudentId(@Param("subjectID") int studentId);
+	 
+	 @Query(
+			 value = "SELECT * FROM registration r INNER JOIN students s ON r.student_id = s.id WHERE s.name = :studentName", 
 			 countQuery = "SELECT count(*) FROM registration",
 			 nativeQuery = true)
 	public Page<Register> findByStudentName(@Param("studentName") String studentName, Pageable page);

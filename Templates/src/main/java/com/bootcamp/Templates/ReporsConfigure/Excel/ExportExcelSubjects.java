@@ -57,9 +57,10 @@ public class ExportExcelSubjects {
 		style.setFont(font);
 		for(Subjects subject: subjects) {
 			Row row = sheet.createRow(rowCounter);
-			createCell(row, rowCounter++, subject.getId(), style);
-			createCell(row, rowCounter++, subject.getCode(), style);
-			createCell(row, rowCounter++, subject.getName(), style);
+			int columnCounter = 0;
+			createCell(row, columnCounter++, subject.getId(), style);
+			createCell(row, columnCounter++, subject.getCode(), style);
+			createCell(row, columnCounter++, subject.getName(), style);
 			rowCounter++;
 		}
 	}
