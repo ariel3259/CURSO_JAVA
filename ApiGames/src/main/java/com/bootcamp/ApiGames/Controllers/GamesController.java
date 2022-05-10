@@ -30,7 +30,7 @@ public class GamesController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> save( @RequestBody Games game, BindingResult result){
+	public ResponseEntity<String> save( @RequestBody Games game){
 		if(game.isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
 		service.save(game);
 		return ResponseEntity.status(201).body("Saved game");

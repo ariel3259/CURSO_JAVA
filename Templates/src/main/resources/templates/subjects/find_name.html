@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html
+	xmlns="http://thymeleaf.org"
+>
+	<head>
+		<title>
+			Students
+		</title>
+	</head>
+	<body>
+		<section th:insert="Layouts/Layouts::nav"></section>
+		<div class="container">
+			<form class="form-control" th:action="@{/subjects/name/{pagNum}/{pagSize} (pagNum = 1, pagSize = 10)" method="post">
+				<div class="mb-3">
+					<label class="form-label">Nombre: </label>
+					<input type="text" name="name" class="form-control"/>
+				</div>
+			</form>
+			<form class="form-control" th:action="@{/subjects/lastName/{pagNum}/{pagSize} (pagNum = 1, pagSize = 10)" method="post">
+				<div class="mb-3">
+					<label class="form-label">Apellido: </label>
+					<input type="text" name="lastName" class="form-control"/>
+				</div>
+			</form>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Last name</th>
+						<th>Dni</th>
+						<th>Phone</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student: ${students}">
+						<td th:text="${student.id}"> </td>
+						<td th:text="${student.name}"> </td>
+						<td th:text="${student.lastName}"> </td>
+						<td th:text="${student.dni}"> </td>
+						<td th:text="${student.phone}"> </td>
+						<td>
+							<a th:href="@{/students/update/{id}(id = ${student.id})}">Edit</a>
+							<a th:href="@{/students/delete/{id}(id = ${student.id})}">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+				
+			</table>
+			<tfoot>
+					<div class="btn-group">
+						<a th:if="${actualPage > 0}" th:href="@{/students/{pagNum}/{pageSize}/{name} (pagNum = ${actualPage - 1}, pagSize = ${pageSize}, name = ${name} )}">Previus</a>
+						<a th:if="${actualPage < totalPages}" th:href="@{/students/{pagNum}/{pageSize}/{name} (pagNum = ${actualPage + 1}, pagSize = ${pageSize}, name = ${name} )}">Next</a>
+					</div>
+				</tfoot>
+		</div>
+		
+	</body>
+</html>

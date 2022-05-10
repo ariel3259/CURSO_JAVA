@@ -15,6 +15,9 @@ import com.bootcamp.Templates.Model.Register;
 import com.bootcamp.Templates.Model.Students;
 import com.bootcamp.Templates.Model.Subjects;
 import com.bootcamp.Templates.Requests.RegisterRequest;
+import com.bootcamp.Templates.Services.RegisterService;
+import com.bootcamp.Templates.Services.StudentsService;
+import com.bootcamp.Templates.Services.SubjectsService;
 
 @Controller
 @RequestMapping("/register")

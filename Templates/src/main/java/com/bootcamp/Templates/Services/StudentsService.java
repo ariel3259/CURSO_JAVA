@@ -1,14 +1,18 @@
-package com.bootcamp.Templates.Controllers;
+package com.bootcamp.Templates.Services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bootcamp.Templates.Model.RegisterRepository;
 import com.bootcamp.Templates.Model.Students;
-import com.bootcamp.Templates.Model.StudentsRepository;
+import com.bootcamp.Templates.Model.Users;
+import com.bootcamp.Templates.Repository.RegisterRepository;
+import com.bootcamp.Templates.Repository.StudentsRepository;
 
 @Service
 public class StudentsService {
@@ -21,6 +25,21 @@ public class StudentsService {
 	
 	public List<Students> GetAllSudents(){
 		return studentsRepository.findAll();
+	}
+	
+	public Page<Students> GetAllStudents(int pagNum, int pagSize){
+		Pageable length = PageRequest.of(pagNum, pagSize);
+		return studentsRepository.findAll(length);
+	}
+	
+	public Page<Students> getByName(int pagNum, int pageSize, String name){
+		Pageable length = PageRequest.of(pagNum - 1, pageSize);
+		return studentsRepository.findByNameContaining(name, length);
+	}
+	
+	public Page<Students> getByLastName(int pagNum, int pageSize, String lastName){
+		Pageable length = PageRequest.of(pagNum - 1, pageSize);
+		return studentsRepository.findByLastNameContaining(lastName, length);
 	}
 	
 	public boolean saveStudents(Students student) {

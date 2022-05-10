@@ -1,14 +1,17 @@
-package com.bootcamp.Templates.Controllers;
+package com.bootcamp.Templates.Services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bootcamp.Templates.Model.RegisterRepository;
 import com.bootcamp.Templates.Model.Subjects;
-import com.bootcamp.Templates.Model.SubjectsRepository;
+import com.bootcamp.Templates.Repository.RegisterRepository;
+import com.bootcamp.Templates.Repository.SubjectsRepository;
 
 @Service
 public class SubjectsService {
@@ -21,6 +24,16 @@ public class SubjectsService {
 	
 	public List<Subjects> getAllSubjects(){
 		return subjectsRepository.findAll();
+	}
+
+	public Page<Subjects> getAllSubjects(int numPage, int pageSize){
+		Pageable pageable = PageRequest.of(numPage - 1, pageSize);
+		return subjectsRepository.findAll(pageable);
+	}
+	
+	public Page<Subjects> getByName(int pageNum, int pageSize, String name){
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		return subjectsRepository.findByName(name, pageable);
 	}
 	
 	public Subjects getOne(int id) {

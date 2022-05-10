@@ -3,6 +3,7 @@ package com.bootcamp.Templates.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.Templates.Model.Students;
+import com.bootcamp.Templates.Model.Users;
+import com.bootcamp.Templates.Services.StudentsService;
 
 @Controller
 @RequestMapping("/students")
@@ -27,6 +31,58 @@ public class StudentsController {
 		List<Students> allStudents = studentService.GetAllSudents();
 		model.addAttribute("students", allStudents);
 		return "/students/index";
+	}
+	
+	@PostMapping("/name/{pagNum}/{pagSize}")
+	public String showGetAllByName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @RequestParam("name") String name) {
+		Page<Students> rawStudents = studentService.getByName(pagNum, pagSize, name);
+		List<Students> students = rawStudents.getContent();
+		int totalPage = rawStudents.getTotalPages();
+		model.addAttribute("students", students);
+		model.addAttribute("totalPages", totalPage);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagSize);
+		model.addAttribute("name", name);
+		return "redirect:/students/find_name";
+	}
+
+	@PostMapping("/lastName/{pagNum}/{pagSize}")
+	public String showGetAllByLastName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @RequestParam("lastName") String lastName) {
+		Page<Students> rawStudents = studentService.getByLastName(pagNum, pagSize, lastName);
+		List<Students> students = rawStudents.getContent();
+		int totalPage = rawStudents.getTotalPages();
+		model.addAttribute("students", students);
+		model.addAttribute("totalPages", totalPage);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagSize);
+		model.addAttribute("lastName", lastName);
+		return "redirect:/students/find_last_name";
+	}
+	
+	@GetMapping("/{pagNum}/{pagSize}/{name}")
+	public String getAllByName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @PathVariable("name") String name) {
+		Page<Students> rawStudents = studentService.getByName(pagNum, pagSize, name);
+		List<Students> students = rawStudents.getContent();
+		int totalPage = rawStudents.getTotalPages();
+		model.addAttribute("students", students);
+		model.addAttribute("totalPages", totalPage);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagSize);
+		model.addAttribute("name", name);
+		return "/students/find_name";
+	}
+
+	@GetMapping("/{pagNum}/{pagSize}/{lastName}")
+	public String getAllByLastName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @PathVariable("lastName") String lastName) {
+		Page<Students> rawStudents = studentService.getByLastName(pagNum, pagSize, lastName);
+		List<Students> students = rawStudents.getContent();
+		int totalPage = rawStudents.getTotalPages();
+		model.addAttribute("students", students);
+		model.addAttribute("totalPages", totalPage);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagSize);
+		model.addAttribute("lastName", lastName);
+		return "/students/find_last_name";
 	}
 	
 	@GetMapping("/create")

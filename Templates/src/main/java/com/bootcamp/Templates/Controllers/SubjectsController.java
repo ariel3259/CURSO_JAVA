@@ -3,6 +3,7 @@ package com.bootcamp.Templates.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.Templates.Model.Subjects;
+import com.bootcamp.Templates.Services.SubjectsService;
 
 @Controller
 @RequestMapping("/subjects")
@@ -34,6 +37,31 @@ public class SubjectsController {
 		Subjects subject = new Subjects();
 		model.addAttribute("subject", subject);
 		return "/subjects/create_subject";
+	}
+	
+	@PostMapping("/name/{pagNum}/{pagSize}")
+	public String showFilterName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @RequestParam("name") String name) {
+		Page<Subjects> rawSubjects = subjectService.getByName(pagNum, pagSize, name);
+		List<Subjects> subjects = rawSubjects.getContent();
+		int totalPages = rawSubjects.getTotalPages();
+		model.addAttribute("subjects", subjects);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagNum);
+		model.addAttribute("name", name);
+		return "redirect:/subjects/find_name";
+	}
+	@GetMapping("/{name}/{pagNum}/{pagSize}")
+	public String FilterName(Model model, @PathVariable("pagNum") int pagNum, @PathVariable("pagSize") int pagSize, @PathVariable("name") String name) {
+		Page<Subjects> rawSubjects = subjectService.getByName(pagNum, pagSize, name);
+		List<Subjects> subjects = rawSubjects.getContent();
+		int totalPages = rawSubjects.getTotalPages();
+		model.addAttribute("subjects", subjects);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("actualPage", pagNum);
+		model.addAttribute("size", pagNum);
+		model.addAttribute("name", name);
+		return "subjects/find_name";
 	}
 	
 	@PostMapping("/create")
