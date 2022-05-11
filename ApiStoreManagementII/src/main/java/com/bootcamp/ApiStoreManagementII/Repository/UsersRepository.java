@@ -7,5 +7,5 @@ import com.bootcamp.ApiStoreManagementII.Model.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
-
+	public boolean existsByEmail(String email);
 }

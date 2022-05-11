@@ -8,4 +8,5 @@ import com.bootcamp.ApiStoreManagementII.Model.Products;
 @Repository
 public interface ProductsRepository extends JpaRepository<Products, Long> {
 	public Products findByCode(int code);
+	public boolean existsByCode(int code);
 }

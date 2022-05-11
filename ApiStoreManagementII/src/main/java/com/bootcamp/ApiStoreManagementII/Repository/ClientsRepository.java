@@ -7,5 +7,5 @@ import com.bootcamp.ApiStoreManagementII.Model.Clients;
 
 @Repository
 public interface ClientsRepository extends JpaRepository<Clients, Long> {
-
+	public boolean existsByDni(int dni);
 }

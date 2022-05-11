@@ -8,4 +8,5 @@ import com.bootcamp.ApiStoreManagementII.Model.Sales;
 @Repository
 public interface SalesRepository extends JpaRepository<Sales, Long> {
 	public Sales findByTicket(int ticket);
+	public boolean existsByTicket(int ticket);
 }
