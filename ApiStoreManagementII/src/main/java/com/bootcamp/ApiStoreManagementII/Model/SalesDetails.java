@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "sales_details")
 public class SalesDetails {
 	private long id;
-	@OneToOne
+	@OneToMany
 	private Sales sale;
 	@OneToMany
 	private Products product;

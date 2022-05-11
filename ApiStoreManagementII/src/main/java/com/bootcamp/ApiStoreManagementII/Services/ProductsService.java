@@ -19,19 +19,21 @@ public class ProductsService {
 	}
 	
 	public boolean save(Products product) {
-		if(repository.existsByCode(product.getCode())) return false;
+		if(repository.existsByCodeAndState(product.getCode(), true)) return false;
+		product.setState(true);
 		repository.save(product);
 		return true;
 	}
 	
 	public boolean update(Products product) {
-		if(!repository.existsById(product.getId())) return false;
+		if(!repository.existsByIdAndState(product.getId(), true)) return false;
+		product.setState(true);
 		repository.save(product);
 		return true;
 	}
 	
 	public boolean delete(long id) {
-		if(!repository.existsById(id)) return false;
+		if(!repository.existsByIdAndState(id, true)) return false;
 		repository.deleteById(id);
 		return true;
 	}

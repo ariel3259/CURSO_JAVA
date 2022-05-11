@@ -1,4 +1,4 @@
-package com.bootcamp.ApiStoreManagementII.Model;
+package com.bootcamp.Articles.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,19 +12,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(
 		uniqueConstraints = {
-				@UniqueConstraint(columnNames = {"code"})
+				@UniqueConstraint(columnNames = {"username"})
 		}
 )
-public class Products {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
+public class Users {
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private int code;
-	private int stock;
-	private String name;
-	private boolean state;
+	private String username;
+	private String password;
 }
