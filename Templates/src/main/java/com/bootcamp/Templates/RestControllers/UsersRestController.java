@@ -60,6 +60,7 @@ public class UsersRestController {
 	@GetMapping("/email/{id}")
 	public ResponseEntity<String> sendEmail(@PathVariable("id") int id){
 		Users user = userService.getOne(id);
+		if(user == null) return ResponseEntity.status(400).body("User doesn't exists");
 		if(!template.sendEmail(user)) return ResponseEntity.status(400).body("Failed to send email");
 		else return ResponseEntity.status(200).body("Email sended");
 	}
