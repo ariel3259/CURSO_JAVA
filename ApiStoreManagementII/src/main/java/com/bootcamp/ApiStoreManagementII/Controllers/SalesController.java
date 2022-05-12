@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +40,8 @@ public class SalesController {
 	}
 	
 	@PostMapping("/{dni}")
-	public ResponseEntity<String> save(@RequestBody Sales sale, @PathVariable("dni") int dni){
+	public ResponseEntity<String> save(@Validated @RequestBody Sales sale, BindingResult result, @PathVariable("dni") int dni){
+		if(result.hasErrors()) return ResponseEntity.status(400).body("Incomplete data");
 		Clients client = serviceC.getOne(dni);
 		sale.setClient(client);
 		if(!service.save(sale)) return ResponseEntity.status(400).body("Sale already exists");

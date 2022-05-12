@@ -32,7 +32,7 @@ public class ProductsTest {
 	private MockMvc mock;
 	
 	@Test
-	void SAVE_PRODUCT_FAIL() throws Exception {
+	void SAVE_PRODUCT_ALREADY_EXISTS() throws Exception {
 		mock = MockMvcBuilders.webAppContextSetup(aplicationContext).build();
 		JSONObject rawProduct = new JSONObject();
 		rawProduct.put("name", "Apple");
@@ -50,6 +50,26 @@ public class ProductsTest {
 				.getResponse()
 				.getContentAsString();
 		assertTrue(JsonResponse.equals("The product already exists"));
+	}
+	
+	@Test
+	void SAVE_PRODUCT_INCOMPLETE_DATA() throws Exception {
+		mock = MockMvcBuilders.webAppContextSetup(aplicationContext).build();
+		JSONObject rawProduct = new JSONObject();
+		rawProduct.put("name", "Apple");
+		rawProduct.put("code", 5676);
+		rawProduct.put("stock", 8);
+		String JsonResponse = mock.perform(post("/api/products")
+				.content(rawProduct.toString())
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.TEXT_PLAIN))
+				.andExpect(
+						status()
+						.isBadRequest())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+		assertTrue(JsonResponse.equals("Incomplete data"));
 	}
 	
 	@Test

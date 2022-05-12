@@ -1,6 +1,7 @@
 package com.bootcamp.Articles.JwtUtils;
 
 import java.io.IOException;
+import java.lang.System.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter{
@@ -38,10 +40,12 @@ public class JwtFilter extends OncePerRequestFilter{
 			try {
 				username = manager.getUsernameFromToken(token);
 			} catch(IllegalArgumentException e) {
-				System.out.println("Unable to get jwt token");
+				logger.warn("Invalid token" + e);
 			}
 			catch(ExpiredJwtException e) {
-				System.out.println("token has expired");
+				logger.warn("token has expired" + e);
+			}catch(SignatureException e) {
+				logger.warn("Invalid username or password" + e);
 			}
 		}
 		else System.out.println("Bearer token not found ");

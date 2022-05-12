@@ -18,6 +18,31 @@ public class ArticlesService {
 		return repository.findAll();
 	}
 	
+	public Articles getByKey(String key, String value) {
+		switch(key) {
+			case "id": 
+					return repository.findById(Long.valueOf(value)).get();
+			case "name":
+				return repository.findByName(value).get(0);
+			case "price":
+				try {
+					return repository.findByPrice(Double.valueOf(value)).get(0);
+				}catch(IndexOutOfBoundsException e) {
+					return new Articles();
+				}
+			case "code":
+				return repository.findByCode(Integer.valueOf(value));
+			case "stock":
+				try {
+				return repository.findByStock(Integer.valueOf(value)).get(0);
+				}catch(IndexOutOfBoundsException e) {
+					return new Articles();
+				}
+			default:
+				return null;
+		}
+	}
+	
 	public boolean save(Articles article){
 		if(repository.existsByCode(article.getCode())) return false;
 		repository.save(article);

@@ -82,6 +82,6 @@ public class UsersTest {
 					.andReturn()
 					.getResponse()
 					.getContentAsString();
-		assertTrue(JsonResponse.equals("The user doesn't exists"));
+		assertTrue(JsonResponse.equals("The user doesn't exists") || JsonResponse.equals("Incomplete data"));
 	}
 }

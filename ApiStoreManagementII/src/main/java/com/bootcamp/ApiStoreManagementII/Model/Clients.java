@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +25,13 @@ import lombok.NoArgsConstructor;
 public class Clients {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@NotNull
 	private int dni;
+	
+	@NotEmpty
 	private String name;
+	
+	@NotEmpty
 	private String lastName;
 }

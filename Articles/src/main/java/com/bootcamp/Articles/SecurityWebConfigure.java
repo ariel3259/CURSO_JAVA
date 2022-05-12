@@ -3,6 +3,7 @@ package com.bootcamp.Articles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,10 +50,22 @@ public class SecurityWebConfigure extends WebSecurityConfigurerAdapter {
 		http
 			.csrf()
 			.disable()
-			.authorizeHttpRequests().antMatchers("/login").permitAll()
+			.authorizeHttpRequests().antMatchers("/login").permitAll()	
 			.and()
-			.authorizeHttpRequests().antMatchers("/register").permitAll()
-			.anyRequest().authenticated()
+			.authorizeHttpRequests().antMatchers("/api/articles").hasRole("NORMAL").antMatchers(HttpMethod.GET)
+			.authenticated()
+			.and()
+			.authorizeHttpRequests().antMatchers("/api/articles").hasRole("ADMIN")
+			.antMatchers(HttpMethod.POST)
+			.authenticated()
+			.and()
+			.authorizeHttpRequests().antMatchers("/api/articles").hasRole("ADMIN")
+			.antMatchers(HttpMethod.PUT)
+			.authenticated()
+			.and()
+			.authorizeHttpRequests().antMatchers("/api/articles").hasRole("ROLE_ADMIN")
+			.antMatchers(HttpMethod.DELETE)
+			.authenticated()
 			.and()
 			.exceptionHandling()
 			.authenticationEntryPoint(entryPoint)
