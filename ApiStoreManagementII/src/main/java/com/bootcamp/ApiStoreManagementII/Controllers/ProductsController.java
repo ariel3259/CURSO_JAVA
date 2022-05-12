@@ -25,7 +25,7 @@ public class ProductsController {
 	
 	@GetMapping
 	public ResponseEntity<List<Products>> getAll(){
-		return ResponseEntity.status(201).body(service.getAll());
+		return ResponseEntity.status(200).body(service.getAll());
 	}
 	
 	@PostMapping

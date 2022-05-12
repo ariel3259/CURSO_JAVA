@@ -26,5 +26,6 @@ public class Products {
 	private int code;
 	private int stock;
 	private String name;
+	private double price;
 	private boolean state;
 }

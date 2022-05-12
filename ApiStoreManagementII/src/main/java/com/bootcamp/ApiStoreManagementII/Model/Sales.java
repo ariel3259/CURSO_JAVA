@@ -2,6 +2,8 @@ package com.bootcamp.ApiStoreManagementII.Model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,5 +30,5 @@ public class Sales {
 	private long id;
 	private int ticket;
 	@OneToMany
-	private Clients client;
+	private List<Clients> client;
 }

@@ -28,6 +28,13 @@ public class Users {
 	private String name;
 	private String password;
 
+	/**
+	 * 
+	 * @param email
+	 * @param lastName
+	 * @param password
+	 * @param name
+	 */
 	public Users(String email, String lastName, String password, String name) {
 		this.email = email;
 		this.lastName = lastName;

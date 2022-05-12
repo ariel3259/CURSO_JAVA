@@ -18,6 +18,10 @@ public class ClientsService {
 		return repository.findAll();
 	}
 	
+	public Clients getOne(int dni) {
+		return repository.findByDni(dni);
+	}
+	
 	public boolean save(Clients client) {
 		if(repository.existsByDni(client.getDni())) return false;
 		repository.save(client);

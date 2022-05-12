@@ -1,9 +1,11 @@
 package com.bootcamp.ApiStoreManagementII.Services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bootcamp.ApiStoreManagementII.Model.Products;
 import com.bootcamp.ApiStoreManagementII.Model.SalesDetails;
@@ -23,6 +25,7 @@ public class SalesDetailsService {
 		return repository.findAll();
 	}
 	
+	@Transactional
 	public boolean save(SalesDetails saleDetail, int codeProduct) {
 		if(repositoryProduct.existsByCodeAndState(codeProduct, true)) return false;
 
@@ -35,7 +38,7 @@ public class SalesDetailsService {
 		};
 		product.setStock(newStock);
 		repositoryProduct.save(product);
-		saleDetail.setProduct(product);
+		saleDetail.setProduct(Arrays.asList(product));
 		repository.save(saleDetail);
 		return true;
 	}

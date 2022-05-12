@@ -13,8 +13,8 @@ import com.bootcamp.ApiStoreManagementII.Model.Products;
 @Repository
 public interface ProductsRepository extends JpaRepository<Products, Long> {
 	
-	@Query(value = "SELECT * FROM products WHERE code = :code AND state = true")
-	public Products findByCode(@Param("code")int code);
+	@Query(value = "SELECT * FROM products WHERE code = :code AND state = true", nativeQuery = true)
+	public Products findByCode(@Param("code") int code);
 
 	public boolean existsByCodeAndState(int code, boolean state);
 
@@ -25,6 +25,6 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
 	public List<Products> findAll();
 
 	@Modifying
-	@Query(value = "UPDATE products SET state = true WHERE id = :id")
+	@Query(value = "UPDATE products SET state = true WHERE id = :id" , nativeQuery = true)
 	public void deleteById(@Param("id") long id);
 }
