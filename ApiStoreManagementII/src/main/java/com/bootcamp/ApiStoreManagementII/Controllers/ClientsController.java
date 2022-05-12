@@ -41,7 +41,7 @@ public class ClientsController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") long id ){
-		if(!service.delete(id)) return ResponseEntity.status(401).body("Client doesn't exists");
+		if(!service.delete(id)) return ResponseEntity.status(400).body("Client doesn't exists");
 		return ResponseEntity.status(200).body("Deleted client");
 	}
 }

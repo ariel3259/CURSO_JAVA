@@ -44,7 +44,7 @@ public class ExportsPdfSales {
 	
 	private void ReadBody(PdfPTable table) {
 		for(Sales sale: sales) {
-			Clients client = sale.getClient().get(0);
+			Clients client = sale.getClient();
 			table.addCell(String.valueOf(sale.getId()));
 			table.addCell(String.valueOf(sale.getTicket()));
 			table.addCell(String.valueOf(client.getDni()));

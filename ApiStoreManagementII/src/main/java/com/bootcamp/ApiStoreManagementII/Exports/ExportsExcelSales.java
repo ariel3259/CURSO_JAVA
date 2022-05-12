@@ -61,7 +61,7 @@ public class ExportsExcelSales {
 		font.setFontHeight(16);
 		style.setFont(font);
 		for(Sales sale: sales) {
-			Clients client = sale.getClient().get(0);
+			Clients client = sale.getClient();
 			Row row = sheet.createRow(rowCounter);
 			int columnCounter = 0;
 			createCell(row, columnCounter++, String.valueOf(sale.getId()), style);

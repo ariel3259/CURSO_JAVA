@@ -40,7 +40,7 @@ public class SalesController {
 	@PostMapping("/{dni}")
 	public ResponseEntity<String> save(@RequestBody Sales sale, @PathVariable("dni") int dni){
 		Clients client = serviceC.getOne(dni);
-		sale.setClient(Arrays.asList(client));
+		sale.setClient(client);
 		if(!service.save(sale)) return ResponseEntity.status(400).body("Sale already exists");
 		return ResponseEntity.status(200).body("Created sale");
 	}

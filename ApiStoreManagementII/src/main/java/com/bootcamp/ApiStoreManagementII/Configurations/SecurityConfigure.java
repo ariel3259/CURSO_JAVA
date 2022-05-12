@@ -3,7 +3,7 @@ package com.bootcamp.ApiStoreManagementII.Configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -49,7 +49,7 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeHttpRequests().antMatchers("/login").permitAll()
 			.and()
-			.authorizeHttpRequests().antMatchers("/api/products").permitAll()
+			.authorizeHttpRequests().antMatchers("/api/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.exceptionHandling()

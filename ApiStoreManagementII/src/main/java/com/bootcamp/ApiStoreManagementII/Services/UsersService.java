@@ -32,6 +32,8 @@ public class UsersService {
 	
 	public boolean update(Users user) {
 		if(!repository.existsById(user.getId())) return false;
+		String passwordHashed = passwordEncoder.encode(user.getPassword());
+		user.setPassword(passwordHashed);
 		repository.save(user);
 		return true;
 	}
