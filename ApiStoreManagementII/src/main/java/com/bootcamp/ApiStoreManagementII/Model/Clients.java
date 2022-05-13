@@ -34,4 +34,10 @@ public class Clients {
 	
 	@NotEmpty
 	private String lastName;
+
+	public Clients(String n, String l, int dni) {
+		this.name = n;
+		this.lastName = l;
+		this.dni = dni;
+	}
 }
